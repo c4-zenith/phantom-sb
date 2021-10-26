@@ -38,11 +38,6 @@ messagespam = f'@everyone C4 ON TOP | ZENITH ON TOP\n{invite}\n{img}\n{chn}'
 
 # ============================================================================================================ #
 
-global start_phone
-
-start_phone = False
-userids = []
-
 # COLORS
 w = W = cc.WHITE
 r = DR = cc.RED
