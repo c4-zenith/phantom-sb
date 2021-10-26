@@ -1,7 +1,7 @@
-## Phantom Selfbot
+# Phantom Selfbot
 A selfbot made in DPY, made by Zenith. :trollface:
 
-# How to use
+## How to use
 * Add your token in `token = 'YOUR-MOMS-TOKEN-HERE'`
 * Change the prefix in `prefix = >`
 * If you have twitch you can add your twitch link in `stream_url = 'https://twitch.tv/#'`
