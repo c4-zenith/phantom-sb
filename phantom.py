@@ -189,7 +189,7 @@ async def test(ctx):
 @phantom.command(aliases=['h'])
 async def help (ctx, category=None):
     if category is None:
-        em = discord.Embed(title = f'Phantom BETA v{SELFBOT.__version__} | Help Panel', description = f'`{len(phantom.commands)}` commands available! | Prefix: `{phantom.command_prefix}`\nUse `> help [category]` to show categories. \nMade with <3 by Zenith/Zephyr', color = 0x010101, timestamp = ctx.message.created_at)
+        em = discord.Embed(title = f'Phantom BETA v{SELFBOT.__version__} | Help Panel', description = f'`{len(phantom.commands)}` commands available! | Prefix: `{phantom.command_prefix}`\nMade with <3 by Zenith/Zephyr', color = 0x010101, timestamp = ctx.message.created_at)
         em.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/880476776260857916/902217022602104832/Phantom.png')
         em.add_field(name = '`🔮 purge <int>`', value = 'Purges message by integer given.')
         em.add_field(name = '`🔮 edittag <msg>`', value = 'Sends the message with glitched edit tag.')
