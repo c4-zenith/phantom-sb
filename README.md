@@ -1,6 +1,5 @@
 ## Phantom Selfbot
 A selfbot made in DPY, made by Zenith. :trollface:
-![C4](https://cdn.discordapp.com/attachments/880476776260857916/902472171388026890/IE_Edit.jpg)
 
 # How to use
 * Add your token in `token = 'YOUR-MOMS-TOKEN-HERE'`
@@ -23,3 +22,5 @@ messagespam = f'@everyone C4 ON TOP | ZENITH ON TOP\n{invite}\n{img}\n{chn}'
 
 > Make sure to install your dependencies/imports too.
 > Also please, PLEASE don't skid this. :rage:
+
+![C4](https://cdn.discordapp.com/attachments/880476776260857916/902472171388026890/IE_Edit.jpg)
