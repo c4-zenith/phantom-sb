@@ -20,12 +20,12 @@ from itertools import cycle
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
 class SELFBOT():
-    __version__ = 1.0
+    __version__ = 1.1
 
 # ============================================================================================================ #
 
 # CONFIG
-token = 'YOUR-MOMS-TOKEN-HERE'
+token = os.environ.get('TOKEN')
 prefix = '>'
 stream_url = 'https://twitch.tv/#'
 
@@ -191,14 +191,27 @@ async def help (ctx, category=None):
     if category is None:
         em = discord.Embed(title = f'Phantom BETA v{SELFBOT.__version__} | Help Panel', description = f'`{len(phantom.commands)}` commands available! | Prefix: `{phantom.command_prefix}`\nMade with <3 by Zenith/Zephyr', color = 0x010101, timestamp = ctx.message.created_at)
         em.set_thumbnail(url = 'https://cdn.discordapp.com/attachments/880476776260857916/902217022602104832/Phantom.png')
+        em.add_field(name = '`🔮 GENERAL`', value = 'View General Commands')
+        em.add_field(name = '`🔮 MALICIOUS`', value = 'View Malicious Commands')
+        em.add_field(name = '`🔮 CREDITS`', value = 'Made with <3 by Zenith and Marshal')
+        await ctx.send(embed=em, delete_after=60)
+    elif str(category).lower() == "general":
+        em = discord.Embed(title = f'Phantom BETA v{SELFBOT.__version__} | General Panel', description = f'`{len(phantom.commands)}` commands available! | Prefix: `{phantom.command_prefix}`\nMade with <3 by Zenith/Zephyr', color = 0x010101, timestamp = ctx.message.created_at)
         em.add_field(name = '`🔮 purge <int>`', value = 'Purges message by integer given.')
         em.add_field(name = '`🔮 edittag <msg>`', value = 'Sends the message with glitched edit tag.')
-        em.add_field(name = '`🔮 report <user> <msg_id> <reason>`', value = 'Report the user pinged with information given.')
+        em.add_field(name = '`🔮 gcname`', value = 'Animates the GC name.')
+        em.add_field(name = '`🔮 logguild`', value = 'Logs the information about the guild this command is ran on.')
         em.add_field(name = '`🔮 userinfo <user>`', value = 'Shows userinfo about the mentioned user.')
         em.add_field(name = '`🔮 serverinfo`', value = 'Shows information about the server the command is runned on.')
         em.add_field(name = '`🔮 hookinfo <url>`', value = 'Shows information about the webhook url mentioned.')
         em.add_field(name = '`🔮 hooksend <url> <msg>`', value = 'Sends message using the webhook url mentioned.')
         em.add_field(name = '`🔮 activity <activity>`', value = 'Changes your activity (Playing, Listening, Watching, Streaming, Stop).')
+        await ctx.send(embed=em, delete_after=60)
+    elif str(category).lower() == "malicious":
+        em = discord.Embed(title = f'Phantom BETA v{SELFBOT.__version__} | Malicious Panel', description = f'`{len(phantom.commands)}` commands available! | Prefix: `{phantom.command_prefix}`\nMade with <3 by Zenith/Zephyr', color = 0x010101, timestamp = ctx.message.created_at)
+        em.add_field(name = '`🔮 spamall`', value = 'Spams message to all channels in a guild.')
+        em.add_field(name = '`🔮 rc <msg>`', value = 'Renames all channels in a guild.')
+        em.add_field(name = '`🔮 report <user> <msg_id> <reason>`', value = 'Report the user pinged with information given.')
         em.add_field(name = '`🔮 tokeninfo <token>`', value = 'Shows token information from the given token.')
         em.add_field(name = '`🔮 tokenfuck <token>`', value = 'Disables the token given in the command.')
         em.add_field(name = '`🔮 geoip <ip>`', value = 'Shows information about the given IP.')
@@ -206,7 +219,7 @@ async def help (ctx, category=None):
         em.add_field(name = '`🔮 pingsite <ip>`', value = 'Pings the site given and returs it\'s status.')
         em.add_field(name = '`🔮 rekt`', value = 'Nukes the server the command is runned on.')
         await ctx.send(embed=em, delete_after=60)
-        
+
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
 @phantom.command()
@@ -226,6 +239,16 @@ async def purge(ctx, amount: int = None):
                 await message.delete()
             except:
                 pass
+
+@phantom.command(aliases=["animategc"])
+async def gcname(ctx):
+    await ctx.message.delete()
+    if isinstance(ctx.message.channel, discord.GroupChannel):
+        gcname = "Phantom"
+        fullname = ""
+        for letter in gcname:
+            fullname = fullname + letter
+            await ctx.message.channel.edit(name=fullname)
 
 @phantom.command()
 async def edittag(ctx, *, message):
@@ -286,13 +309,50 @@ async def guildinfo(ctx):
     await ctx.message.delete()
     embed = discord.Embed(title='**Guild Info**', color=0xFFFAFA, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
     guild = ctx.message.guild
-    roles = [role.mention for role in reversed(guild.roles)]
     embed.add_field(name='**Owner**', value=f'<@{ctx.message.guild.owner_id}>', inline=False)
     embed.add_field(name='**Created At**', value=guild.created_at, inline=False)
     embed.add_field(name='**Amount of Roles**', value=len(guild.roles), inline=False)
     embed.add_field(name='**Amount of Members**', value=len(guild.members), inline=False)
     embed.set_image(url=ctx.guild.icon_url)
     await ctx.send(embed=embed, delete_after=60)
+
+@phantom.command(aliases=['logguild'])
+async def logserver (ctx):
+    await ctx.message.delete()
+    guild_name = (ctx.guild.name)
+    guild_desc = (ctx.guild.description)
+    guild_id = (ctx.guild.id)
+    guild_reg = (ctx.guild.region)
+    guild_tc = (ctx.guild.text_channels)
+    guild_vc = (ctx.guild.voice_channels)
+    guild_members = (ctx.guild.member_count)
+    guild_roles = (ctx.guild.roles)
+    guild_create_at = (ctx.guild.created_at)
+    guild_verify =(ctx.guild.verification_level)
+    guild_mfa = (ctx.guild.mfa_level)
+    guild_owner = (ctx.guild.owner_id)
+
+    print(f'{b}Basic Information{re}')
+    print(f'''
+    Name | {guild_name}
+    Description | {guild_desc}
+    ID | {guild_id}
+    Region | {guild_reg}
+    ''')
+    print(f'{b}Stats{re}')
+    print(f'''
+    Text Channels | {guild_tc}
+    Voice Channels | {guild_vc}
+    Member Count | {guild_members}
+    Roles Count | {guild_roles}
+    Created At | {guild_create_at}
+    ''')
+    print(f'{b}Other Information{re}')
+    print(f'''
+    Verification Level | {guild_verify}
+    MFA Level | {guild_mfa}
+    Owner's ID | {guild_owner}
+    ''')
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 
@@ -524,6 +584,24 @@ async def tokenfuck(ctx, _token):
                 break
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- #
+
+@phantom.command()
+async def spamall(ctx): 
+    await ctx.message.delete()
+    count = 0
+    for i in range(5):
+        try:
+            await random.choice(ctx.guild.text_channels).send(messagespam)
+            count += 1
+            print(f"[+] Message sent: {count}")
+        except:
+            continue
+
+@phantom.command(aliases=["rc"])
+async def renamechannels(ctx, *, name):
+    await ctx.message.delete()
+    for channel in ctx.guild.channels:
+        await channel.edit(name=name)
 
 @phantom.command()
 async def cdel(ctx):
