@@ -13,7 +13,7 @@ prefix = '>'
 stream_url = 'https://twitch.tv/#'
 
 # RAID MESSAGE
-invite = 'https://discord.gg/P3DjqZYw2Z' # <- Server Link #
+invite = 'https://discord.gg/mbpm3AtMy9' # <- Server Link #
 img = 'https://cdn.discordapp.com/attachments/877383266573881355/898093323867258900/edit2.mp4\nhttps://cdn.discordapp.com/attachments/877383266573881355/898093494156005386/chad_milltary.mp4\nhttps://cdn.discordapp.com/attachments/881354773633302559/900022607364124762/afrikakorps.mp4'
 chn = 'https://www.youtube.com/channel/UCBdigW_kb908mCnwRn_OK0A'
 
